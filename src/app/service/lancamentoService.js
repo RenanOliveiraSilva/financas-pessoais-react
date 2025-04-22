@@ -6,7 +6,7 @@ export default class LancamentoService extends ApiService {
     }
 
     consultar(lancamentoFiltro) {
-        let params = `?ano=${lancamentoFiltro.ano}`;
+        let params = `/?ano=${lancamentoFiltro.ano}`;
 
         if(lancamentoFiltro.mes) {
             params = `${params}&mes=${lancamentoFiltro.mes}`;
@@ -26,4 +26,29 @@ export default class LancamentoService extends ApiService {
 
         return this.get(params);
     }
+
+    salvar(lancamento) {
+        return this.post('/', lancamento);
+    }
+
+    atualizar(lancamento) {
+        return this.put(`/${lancamento.id}`, lancamento);
+    }
+
+    deletar(id) {
+        return this.delete(`/${id}`);
+    }
+
+    efetivar(id) {
+        return this.put(`/${id}/atualiza-status`, { status: 'EFETIVADO' });
+    }
+
+    cancelar(id) {
+        return this.put(`/${id}/atualiza-status`, { status: 'CANCELADO' });
+    }
+
+    buscarPorId(id) {
+        return this.get(`/${id}`);
+    }
+
 }

@@ -4,10 +4,12 @@ import FormGroup from "../components/formGroup.js";
 import { withRouter } from "react-router-dom";
 
 import UsuarioService from "../app/service/usuarioService";
-import LocalStorageService from "../app/service/localstorageService.js";
 import { mensagemErro } from "../components/toastr";
+import AuthContext from "../app/service/authContext.js";
 
 class Login extends React.Component {
+  static contextType = AuthContext; // ⬅️ conecta o contexto
+
   state = {
     email: "",
     senha: "",
@@ -22,6 +24,11 @@ class Login extends React.Component {
     this.props.history.push("/cadastro-usuarios");
   };
 
+  componentDidMount() {
+    // Agora, a responsabilidade de logout é do encerrarSessao no context.
+    this.context.encerrarSessao();
+  }
+
   entrar = () => {
     this.service
       .autenticar({
@@ -29,11 +36,11 @@ class Login extends React.Component {
         senha: this.state.senha,
       })
       .then((response) => {
-        LocalStorageService.adicionarItem("_usuario_logado", response.data);
+        this.context.iniciarSessao(response.data); // ⬅️ salva no contexto
         this.props.history.push("/home");
       })
       .catch((erro) => {
-        mensagemErro(erro.response.data);
+        mensagemErro(erro.response?.data || "Erro ao autenticar");
       });
   };
 

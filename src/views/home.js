@@ -1,8 +1,10 @@
 import React from "react";
 import UsuarioService from "../app/service/usuarioService";
-import LocalStorageService from "../app/service/localstorageService";
+import AuthContext from "../app/service/authContext";
 
 class Home extends React.Component {
+  static contextType = AuthContext;
+
   state = {
     saldo: 0,
   };
@@ -13,8 +15,12 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    const usuarioLogado = LocalStorageService.obterItem("_usuario_logado");    
-    // const usuarioLogado = { id: 1 };
+    const usuarioLogado = this.context.usuarioAutenticado;
+
+    if (!usuarioLogado) {
+      this.props.history.push("/login");
+      return;
+    }
 
     this.usuarioService
       .obterSaldoPorUsuario(usuarioLogado.id)
@@ -41,14 +47,10 @@ class Home extends React.Component {
             abaixo para navegar pelo sistema.
           </p>
           <p className="lead">
-            <a
-              className="btn btn-primary btn-lg"
-              href="#/cadastro-usuarios"
-              role="button"
-            >
-              Cadastrar Usuário
+            <a className="btn btn-danger btn-lg" href="#/consulta-lancamentos" role="button">
+              Consultar Lançamento
             </a>
-            <a className="btn btn-danger btn-lg" href="#/" role="button">
+            <a className="btn btn-danger btn-lg" href="#/cadastro-lancamentos" role="button">
               Cadastrar Lançamento
             </a>
           </p>

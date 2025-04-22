@@ -1,6 +1,12 @@
 import React from "react";
-import { createRoot } from 'react-dom/client'; // Importe createRoot
+import { createRoot } from 'react-dom/client';
 import App from "./main/App";
+import { AuthProvider } from "./app/service/authContext";
 
-const root = createRoot(document.getElementById('root')); // Crie uma instância de root
-root.render(<App />); // Renderize o componente principal
+const root = createRoot(document.getElementById('root'));
+
+root.render(
+  <AuthProvider>
+    <App />
+  </AuthProvider>
+);

@@ -307,3 +307,8 @@ pre {
 .btn {
     margin-right: 5px;
 }
+
+.modal.d-block {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
