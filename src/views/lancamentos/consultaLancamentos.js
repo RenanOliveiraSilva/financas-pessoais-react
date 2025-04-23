@@ -27,7 +27,7 @@ class ConsultaLancamentos extends React.Component {
   }
 
   componentDidMount() {
-    const usuarioLogado = LocalStorageService.obterItem('_usuario_logado');
+    const usuarioLogado = LocalStorageService.obterItem('usuarioLogado');
     if (usuarioLogado === null) {
       this.props.history.push('/login')
       return;
@@ -37,7 +37,7 @@ class ConsultaLancamentos extends React.Component {
   }
 
   buscar = () => {
-    const usuarioLogado = LocalStorageService.obterItem('_usuario_logado');
+    const usuarioLogado = LocalStorageService.obterItem('usuarioLogado');
 
     const lancamentoFiltro = {
       ano: this.state.ano,
@@ -45,6 +45,8 @@ class ConsultaLancamentos extends React.Component {
       tipo: this.state.tipo,
       usuario: usuarioLogado.id
     }
+
+    console.log(lancamentoFiltro);
 
     this.service.consultar(lancamentoFiltro).then(response => {
       const lista = response.data;

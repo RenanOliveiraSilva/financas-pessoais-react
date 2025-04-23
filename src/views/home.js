@@ -34,26 +34,26 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="jumbotron">
-          <h1 className="display-3">Bem vindo!</h1>
-          <p className="lead">Esse é seu sistema de finanças.</p>
-          <p className="lead">
-            Seu saldo para o mês atual é de R$ {this.state.saldo}
+      <div className="container mt-5">
+        <div className="card shadow-sm">
+        <div className="card border-0 shadow-sm p-4 bg-body-tertiary">
+          <h1 className="display-5 text-primary fw-bold">Bem-vindo!</h1>
+          <p className="lead">Esse é seu sistema de finanças pessoais.</p>
+          <p className="fs-5 mb-3">
+            Saldo para o mês atual:{" "}
+            <span className="badge bg-success fs-6">R$ {this.state.saldo}</span>
           </p>
-          <hr className="my-4" />
-          <p>
-            E essa é sua área administrativa, utilize um dos menus ou botões
-            abaixo para navegar pelo sistema.
-          </p>
-          <p className="lead">
-            <a className="btn btn-danger btn-lg" href="#/consulta-lancamentos" role="button">
-              Consultar Lançamento
+          <hr />
+          <p className="text-muted">Use os botões abaixo para navegar.</p>
+          <div className="d-flex flex-wrap gap-3">
+            <a href="#/consulta-lancamentos" className="btn btn-outline-primary btn-lg">
+              Consultar Lançamentos
             </a>
-            <a className="btn btn-danger btn-lg" href="#/cadastro-lancamentos" role="button">
+            <a href="#/cadastro-lancamentos" className="btn btn-primary btn-lg">
               Cadastrar Lançamento
             </a>
-          </p>
+          </div>
+        </div>
         </div>
       </div>
     );

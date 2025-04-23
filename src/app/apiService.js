@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const httpClient = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: "http://172.16.204.64:8080",
 });
 
 class ApiService {
